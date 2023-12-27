@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acmeair-web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: acmeair-web
+  template:
+    metadata:
+      labels:
+        app: acmeair-web
+    spec:
+      containers:
+        - name: acmeair-web
+          image: mohibqureshi7/acmeair:acmeair
+          ports:
+            - containerPort: 9443
+          env:
+            - name: AUTH_SERVICE
+              value: "mongo-service:27017"  # Use the Service name for MongoDB
+          # Other configurations...
